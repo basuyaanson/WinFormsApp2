@@ -16,7 +16,12 @@ namespace WinFormsApp2
             this.Width = width;
             this.Height = height;
         }
-     
+        public GameObject(int x, int yt)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
         //遊戲中的座標
         public int x
         {
@@ -53,6 +58,10 @@ namespace WinFormsApp2
         public int Damage
         { get; set; }
         public int Level
+        { get; set; }
+        public int ShotSpeed
+        { get; set; }
+        public int Number
         { get; set; }
 
 

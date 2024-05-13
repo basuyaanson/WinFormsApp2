@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp2
 {
+    //玩家類
     class Hero : GameObject
     {
-      
-        //建構子 傳入座標
-        public Hero(int x, int y, WeaponFater wp) : base(x, y, img.Width, img.Height)
+        //建構子 傳入座標 武器編號
+        public Hero(int x, int y, int weaponNumber,int Skill) : base(x, y, img.Width, img.Height)
         {
-            HeroType(wp);
+            this.Skill = Skill;
+            this.WeaponNumber = weaponNumber;
+
+            this.Level = 1;//等級
+            this.HP = 100;//生命值
+           
+            SetHeroInfo(WeaponNumber);
         }
+
         //圖片
         private static Image img = Asset.em1;
 
@@ -23,12 +30,29 @@ namespace WinFormsApp2
             get; set;
         }
 
-        public void HeroType(WeaponFater wp)
+        //
+        public int ShotSpeed
+        { get; set; }
+        public int WeaponNumber
+        { get; set; }
+        public int Skill
+        { get; set; }
+
+        //--------------事件
+        //獲得玩家基礎數值
+        public void SetHeroInfo(int wea)
         {
-            this.Speed = 3;
-            this.HP = 1;
-            this.Damage = 1;
-            this.Level = 1;
+            switch(wea)
+            {
+                case 0:
+                    Wp = new WP_Pistol(0, 0, 0, 0);
+                    this.Speed = Wp.MoveSpeed + this.Speed;
+                    break;
+                case 1:
+                    Wp = new WP_Rifle(0, 0, 0, 0);
+                    this.Speed = Wp.MoveSpeed + this.Speed;
+                    break;
+            }
         }
 
         //繪製
@@ -37,9 +61,36 @@ namespace WinFormsApp2
             g.DrawImage(img, this.x, this.y);
         }
 
+        //開火
+        public void Fire()
+        {
+            switch (WeaponNumber)
+            {
+                case 0:
+                    SingleObject.GetSingle().AddGameObject(new WP_Rifle
+                            (SingleObject.GetSingle().Aim.x, SingleObject.GetSingle().Aim.y, this.x + this.Width / 2, this.y + this.Height / 2));
+                    break;
+                case 1:
+                    SingleObject.GetSingle().AddGameObject(new WP_Pistol
+                            (SingleObject.GetSingle().Aim.x, SingleObject.GetSingle().Aim.y, this.x + this.Width / 2, this.y + this.Height / 2));
+                    break;
+            }
+
+        }
+
+    }
+
+    //準心
+    class Aim : GameObject
+    {
+        //座標
+        public Aim(int x, int y) : base(x, y)
+        {
+        }
         //移動滑鼠
         public void MouseMove(MouseEventArgs e)
         {
+
             this.x = e.X;//飛機的座標等於鼠標
             this.y = e.Y;
         }
@@ -60,100 +111,6 @@ namespace WinFormsApp2
         public static bool IsRight = false;
         public static bool IsP = true;
     }
-    //玩家
-    /* class Hero : GameObject
-     {
-         //建構子 座標 速度 生命值 攻擊傷害
-         public Hero(int x, int y, int speed, int hp, int damage, int level) : base(x, y, img.Width, img.Height)
-         {
-             this.Score = 1;
-             this.CnaFire = true;
-             this.shootSpeed = 1000;
-         }
-         //玩家圖片
-         private static Image img = Resource1.em1;
-         //
-         public int Score
-         { get; set; }
-         public bool CnaFire
-         { get; set; }
-         public int shootSpeed
-         { get; set; }
-
-         //
-         public override void Draw(Graphics g)
-         {
-             g.DrawImage(img, this.x, this.y);
-             //
-             Pen p = new Pen(Color.Red);
-             g.DrawRectangle(p, this.x, y, this.Width, this.Height);
-
-         }
-
-         public void Fire()
-         {
-             SingleObject.GetSingle().AddGameObject(new HeroBullet
-                 (SingleObject.GetSingle().Aim.x, SingleObject.GetSingle().Aim.y, this.x + 10, this.y + 30, 10));
-         }
-
-         //隨機獲得buff
-         public string[] GetBuff()
-         {
-             string[] buff = new string[3];
-
-             Random r = new Random();
-             switch (r.Next(0, 3))
-             {
-                 case 0:
-                     buff[0] = "0";
-                     buff[1] = "移動速度增加 1";
-                     return buff;
-                 case 1:
-                     buff[0] = "1";
-                     buff[1] = "生命值增加 5";
-                     return buff;
-                 case 2:
-                     buff[0] = "2";
-                     buff[1] = "變更射擊速度 快";
-                     return buff;
-                 case 3:
-                     buff[0] = "3";
-                     buff[1] = "傷害增加 2";
-                     return buff;
-                 default:
-                     return buff;
-             }
-         }
-
-         //確定選擇buff並賦值
-         public void SelcetBuff(string selcet)
-         {
-             switch (selcet)
-             {
-                 case "0":
-                     this.Speed += 1;
-                     break;
-                 case "1":
-                     this.hp += 5;
-                     break;
-                 case "2":
-                     this.shootSpeed = 100;
-                     break;
-                 case "3":
-                     this.Damage += 2;
-                     break;
-             }
-             this.Level += 1;
-         }
-
-         /* //玩家死亡
-          public void IsDead()
-          {
-              if (this.hp <= 0)
-              {
-                  //刪除自身
-              }
-          }*/
 }
 
 

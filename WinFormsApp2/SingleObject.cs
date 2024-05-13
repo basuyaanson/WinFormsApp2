@@ -23,23 +23,29 @@ namespace WinFormsApp2
             }
             return _single;
         }
-
-        public WeaponFater Wp
-        {
-            get; set;
-        }
-
+        //-------獲取遊戲對象
         //獲取玩家對象
         public Hero Hero
         {
             get; set;
         }
 
-        //獲取敵人對象
-        public B Bb
+        //獲取鼠標
+        public Aim Aim
         {
             get; set;
         }
+
+        public WeaponFater Wp
+        {
+            get; set;
+        }
+
+        public List<WeaponFater> HeroBulletList = new List<WeaponFater>();
+
+        //獲取敵人對象
+        public List<EnemyFather> EnemyList = new List<EnemyFather>();
+
 
         //-----------------------事件
 
@@ -51,13 +57,18 @@ namespace WinFormsApp2
             {
                 this.Hero = go as Hero;
             }
-            else if (go is B)
+            else if (go is EnemyFather)
             {
-                this.Bb = go as B;
+                this.EnemyList.Add (go as EnemyFather);
+            }
+            else if (go is Aim)
+            {
+                this.Aim = go as Aim;
             }
             else if (go is WeaponFater)
             {
-                this.Wp = go as WeaponFater;
+                this.HeroBulletList.Add(go as WeaponFater);
+                Console.WriteLine("fire");
             }
         }
 
@@ -65,7 +76,14 @@ namespace WinFormsApp2
         public void DrwaGameObject(Graphics g)
         {
             this.Hero.Draw(g);
-            this.Bb.Draw(g);
+            for (int i = 0; i < HeroBulletList.Count; i++)
+            {
+                HeroBulletList[i].Draw(g);
+            }
+            for (int i = 0; i < EnemyList.Count; i++)
+            {
+                EnemyList[i].Draw(g);
+            }
         }
 
         //刪除對象

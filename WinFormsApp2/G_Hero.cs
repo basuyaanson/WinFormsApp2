@@ -16,9 +16,9 @@ namespace WinFormsApp2
             this.WeaponNumber = weaponNumber;
 
             this.Level = 1;//等級
-            this.HP = 100;//生命值
-           
-            SetHeroInfo(WeaponNumber);
+
+            SetHeroInfo(Skill);
+            SetWeaponInfo(WeaponNumber);
         }
 
         //圖片
@@ -39,8 +39,28 @@ namespace WinFormsApp2
         { get; set; }
 
         //--------------事件
+        public void SetHeroInfo(int Skill)
+        {
+            switch (Skill)
+            {
+                //普通人
+                case 0:
+                    this.HP = 100;//生命值
+                    this.Speed = 3;
+                    this.Damage = 5;
+                    break;
+
+                //震撼(教練)
+                case 1:
+                    this.HP = 150;//生命值
+                    this.Speed = 2;
+                    this.Damage = 3;
+                    break;
+            }
+        }
+
         //獲得玩家基礎數值
-        public void SetHeroInfo(int wea)
+        public void SetWeaponInfo(int wea)
         {
             switch(wea)
             {
@@ -48,10 +68,12 @@ namespace WinFormsApp2
                     Wp = new WP_Pistol(0, 0, 0, 0);
                     this.Speed = Wp.MoveSpeed + this.Speed;
                     break;
+
                 case 1:
                     Wp = new WP_Rifle(0, 0, 0, 0);
                     this.Speed = Wp.MoveSpeed + this.Speed;
                     break;
+
             }
         }
 

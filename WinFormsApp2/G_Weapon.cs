@@ -61,6 +61,11 @@ namespace WinFormsApp2
         }
     }
 
+    enum WeaponType
+    {
+        Pistol,Rifle
+    }
+
     class WP_Pistol : WeaponFater
     {
         //圖片
@@ -127,7 +132,7 @@ namespace WinFormsApp2
         public override void GetInfo()
         {
             this.Damage = 17;
-            this.ShotSpeed = 500;
+            this.ShotSpeed = 100;
             this.Speed = 5;
 
             this.MoveSpeed = 2;

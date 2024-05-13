@@ -16,6 +16,11 @@ namespace WinFormsApp2
             AllocConsole();
         }
 
+        public bool Hold
+        { get; set; }
+        public bool CnaFire { get; set; }
+
+
         //遊戲初始化
         public void InitialGame()
         {
@@ -25,19 +30,24 @@ namespace WinFormsApp2
 
             //計時器
             Game_Tick.Start();
+            Time_Tick.Start();
+
+           
+            CnaFire = true;
 
             //準心
             SingleObject.GetSingle().AddGameObject(new Aim(0, 0));
 
             //對象
-            SingleObject.GetSingle().AddGameObject(new Hero(0, 0, 1,0));//新增玩家
+            SingleObject.GetSingle().AddGameObject(new Hero(0, 0, 1, 0));//新增玩家
+
+            Fire_Tick.Interval = SingleObject.GetSingle().Hero.Wp.ShotSpeed;
 
             //敵人
             SingleObject.GetSingle().AddGameObject(new EnemyNormal(100, 100, SingleObject.GetSingle().Hero, 0));//新增敵人
             SingleObject.GetSingle().AddGameObject(new EnemyNormal(500, 500, SingleObject.GetSingle().Hero, 0));//新增敵人
             SingleObject.GetSingle().AddGameObject(new EnemySpecial(800, 500, SingleObject.GetSingle().Hero, 1));//新增敵人
             SingleObject.GetSingle().AddGameObject(new EnemySpecial(500, 900, SingleObject.GetSingle().Hero, 0));//新增敵人
-
 
             /*
             //AllocConsole();
@@ -69,9 +79,34 @@ namespace WinFormsApp2
         //按下滑鼠
         private void Form_Game_MouseDown(object sender, MouseEventArgs e)
         {
-
-            SingleObject.GetSingle().Hero.Fire();
+           
+            if (e.Button == MouseButtons.Left)
+            {
+                Hold = true;
+                if (CnaFire == true && Hold == true)
+                {
+                    SingleObject.GetSingle().Hero.Fire();
+                    CnaFire = false;
+                }
+                Fire_Tick.Start();
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+            }
         }
+
+        //放開滑鼠
+        private void Form_Game_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Hold = false;
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+            }
+        }
+
 
         //按下鍵盤
         private void Form_Game_KeyDown(object sender, KeyEventArgs e)
@@ -130,15 +165,20 @@ namespace WinFormsApp2
 
         //---------------自訂義事件
 
-        public void Sll()
+        public void UpdataInfo()
         {
-
+            L_PlayerInfo.Text =
+                "移動速度" + SingleObject.GetSingle().Hero.Speed +
+                "\n射速" + SingleObject.GetSingle().Hero.ShotSpeed +
+                "\n傷害" + SingleObject.GetSingle().Hero.Damage.ToString() +
+                "\n武器種類：" + SingleObject.GetSingle().Hero.Wp.ToString()
+                ;
         }
 
         //---------------計時器
 
         //畫面刷新 玩家移動刷新
-        private void Game_Tick_Event(object sender, EventArgs e)
+        private void Game_Tick_Tick(object sender, EventArgs e)
         {
             if (PlayerInput.IsUp && SingleObject.GetSingle().Hero.y >= 10)
             {
@@ -162,7 +202,24 @@ namespace WinFormsApp2
         //時間計時器
         private void Time_Tick_Tick(object sender, EventArgs e)
         {
+            UpdataInfo();
+        }
 
+        //自動開火
+        private void Fire_Tick_Tick(object sender, EventArgs e)
+        {
+           
+            CnaFire = true;
+            if (CnaFire == true && Hold == true)
+            {
+                SingleObject.GetSingle().Hero.Fire();
+                CnaFire = false;
+            }
+            if (Hold == false)
+            {
+                Fire_Tick.Stop();
+                CnaFire = true;
+            }
         }
 
         //---------------窗口事件
@@ -188,6 +245,5 @@ namespace WinFormsApp2
             SingleObject.GetSingle().DrwaGameObject(e.Graphics);
         }
 
-     
     }
 }

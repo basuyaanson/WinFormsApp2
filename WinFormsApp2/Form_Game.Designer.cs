@@ -31,81 +31,92 @@
             components = new System.ComponentModel.Container();
             Game_Tick = new System.Windows.Forms.Timer(components);
             L_timeCount = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
+            L_HP = new Label();
+            L_Score = new Label();
+            L_PlayerInfo = new Label();
+            L_WaveCount = new Label();
             panel1 = new Panel();
             Time_Tick = new System.Windows.Forms.Timer(components);
+            Fire_Tick = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // Game_Tick
             // 
             Game_Tick.Interval = 33;
-            Game_Tick.Tick += Game_Tick_Event;
+            Game_Tick.Tick += Game_Tick_Tick;
             // 
             // L_timeCount
             // 
             L_timeCount.AutoSize = true;
-            L_timeCount.Location = new Point(18, 18);
+            L_timeCount.Font = new Font("Microsoft JhengHei UI", 25F);
+            L_timeCount.Location = new Point(18, 17);
             L_timeCount.Name = "L_timeCount";
-            L_timeCount.Size = new Size(42, 15);
+            L_timeCount.Size = new Size(99, 43);
             L_timeCount.TabIndex = 0;
-            L_timeCount.Text = "label1";
+            L_timeCount.Text = "9999";
             // 
-            // label2
+            // L_HP
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(82, 155);
-            label2.Name = "label2";
-            label2.Size = new Size(42, 15);
-            label2.TabIndex = 1;
-            label2.Text = "label2";
+            L_HP.AutoSize = true;
+            L_HP.Font = new Font("Microsoft JhengHei UI", 15F);
+            L_HP.Location = new Point(12, 238);
+            L_HP.Name = "L_HP";
+            L_HP.Size = new Size(115, 25);
+            L_HP.TabIndex = 1;
+            L_HP.Text = "血量 : 5000";
             // 
-            // label3
+            // L_Score
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(18, 64);
-            label3.Name = "label3";
-            label3.Size = new Size(42, 15);
-            label3.TabIndex = 2;
-            label3.Text = "label3";
+            L_Score.AutoSize = true;
+            L_Score.Font = new Font("Microsoft JhengHei UI", 14F);
+            L_Score.Location = new Point(12, 70);
+            L_Score.Name = "L_Score";
+            L_Score.Size = new Size(117, 24);
+            L_Score.TabIndex = 2;
+            L_Score.Text = "分數 : 99999";
             // 
-            // label4
+            // L_PlayerInfo
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(18, 110);
-            label4.Name = "label4";
-            label4.Size = new Size(42, 15);
-            label4.TabIndex = 3;
-            label4.Text = "label4";
+            L_PlayerInfo.AutoSize = true;
+            L_PlayerInfo.Font = new Font("Microsoft JhengHei UI", 12F);
+            L_PlayerInfo.Location = new Point(12, 138);
+            L_PlayerInfo.Name = "L_PlayerInfo";
+            L_PlayerInfo.Size = new Size(41, 20);
+            L_PlayerInfo.TabIndex = 3;
+            L_PlayerInfo.Text = "射速";
             // 
-            // label5
+            // L_WaveCount
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(18, 155);
-            label5.Name = "label5";
-            label5.Size = new Size(42, 15);
-            label5.TabIndex = 4;
-            label5.Text = "label5";
+            L_WaveCount.AutoSize = true;
+            L_WaveCount.Font = new Font("Microsoft JhengHei UI", 15F);
+            L_WaveCount.Location = new Point(18, 103);
+            L_WaveCount.Name = "L_WaveCount";
+            L_WaveCount.Size = new Size(91, 25);
+            L_WaveCount.TabIndex = 4;
+            L_WaveCount.Text = "波次 : 99";
             // 
             // panel1
             // 
-            panel1.Controls.Add(label5);
+            panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(L_WaveCount);
+            panel1.Controls.Add(L_HP);
             panel1.Controls.Add(L_timeCount);
-            panel1.Controls.Add(label4);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(label3);
+            panel1.Controls.Add(L_PlayerInfo);
+            panel1.Controls.Add(L_Score);
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(160, 205);
+            panel1.Size = new Size(334, 273);
             panel1.TabIndex = 5;
             // 
             // Time_Tick
             // 
             Time_Tick.Interval = 1000;
             Time_Tick.Tick += Time_Tick_Tick;
+            // 
+            // Fire_Tick
+            // 
+            Fire_Tick.Tick += Fire_Tick_Tick;
             // 
             // Form_Game
             // 
@@ -119,6 +130,7 @@
             Paint += Form_Game_Paint;
             KeyDown += Form_Game_KeyDown;
             KeyUp += Form_Game_KeyUp;
+            MouseClick += Form_Game_MouseClick;
             MouseDown += Form_Game_MouseDown;
             MouseMove += Form1_MouseMove;
             panel1.ResumeLayout(false);
@@ -130,11 +142,12 @@
 
         private System.Windows.Forms.Timer Game_Tick;
         private Label L_timeCount;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label5;
+        private Label L_HP;
+        private Label L_Score;
+        private Label L_PlayerInfo;
+        private Label L_WaveCount;
         private Panel panel1;
         private System.Windows.Forms.Timer Time_Tick;
+        private System.Windows.Forms.Timer Fire_Tick;
     }
 }

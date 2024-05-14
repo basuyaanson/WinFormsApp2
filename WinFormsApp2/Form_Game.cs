@@ -410,7 +410,7 @@ namespace WinFormsApp2
         //ÀË´ú¤É¯Å
         public void Cheaklevelup()
         {
-            if(SingleObject.GetSingle().Hero.Score > 30 * SingleObject.GetSingle().Hero.Level)
+            if(SingleObject.GetSingle().Hero.Score > 50 * SingleObject.GetSingle().Hero.Level)
             {
                 SelectBuff();
             }

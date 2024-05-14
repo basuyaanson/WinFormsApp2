@@ -25,7 +25,7 @@ namespace WinFormsApp2
         }
         //-------獲取遊戲對象
         //獲取玩家對象
-        public Hero Hero
+        public HeroFather Hero
         {
             get; set;
         }
@@ -53,9 +53,9 @@ namespace WinFormsApp2
         public void AddGameObject(GameObject go)
         {
             //找到相同的類別
-            if (go is Hero)
+            if (go is HeroFather)
             {
-                this.Hero = go as Hero;
+                this.Hero = go as HeroFather;
             }
             else if (go is EnemyFather)
             {
@@ -75,6 +75,7 @@ namespace WinFormsApp2
         //繪製對象
         public void DrwaGameObject(Graphics g)
         {
+            collision();
             this.Hero.Draw(g);
             for (int i = 0; i < HeroBulletList.Count; i++)
             {
@@ -107,29 +108,29 @@ namespace WinFormsApp2
         //碰撞體
         public void collision()
         {
-          /*  //檢查 敵人 
+          //檢查 敵人 
             for (int i = 0; i < EnemyList.Count; i++)
             {
-                /*  //與 玩家碰撞
-                   if (EnemyList[i].GetRectangle().IntersectsWith(H.GetRectangle()))
-                   {
-                       H.hp -= EnemyList[i].Damage;//命中扣血
-                       EnemyList[i].IsDead();//檢測生命值
-                       SingleObject.GetSingle().EnemyList.Remove(EnemyList[i]);
-                       break;
-                   }
+                 //與 玩家碰撞
+               /*  if (EnemyList[i].GetRectangle().IntersectsWith(Hero.GetRectangle()))
+                 {
+                     Hero.HP -= EnemyList[i].Damage;//命中扣血
+                     EnemyList[i].IsDead();//檢測生命值
+                     SingleObject.GetSingle().EnemyList.Remove(EnemyList[i]);//刪除敵人
+                     break;
+                 }*/
                 //與 玩家子彈碰撞
                 for (int j = 0; j < HeroBulletList.Count; j++)
                 {
                     if (EnemyList[i].GetRectangle().IntersectsWith(HeroBulletList[j].GetRectangle()))//如果子彈的矩形與目標相交
                     {
-                        EnemyList[i].hp -= H.Damage;//命中扣血
+                        EnemyList[i].HP -= Hero.Damage;//命中扣血
                         EnemyList[i].IsDead();//檢測生命值
                         SingleObject.GetSingle().HeroBulletList.Remove(HeroBulletList[j]);//刪除子彈
                         break;
                     }
                 }
-            }*/
+            }
         }
     }
 }

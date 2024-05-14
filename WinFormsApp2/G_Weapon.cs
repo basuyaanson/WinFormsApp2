@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp2
 {
+    enum WeaponType
+    {
+        手槍, 步槍
+    }
+
     //武器父類
     class WeaponFater : GameObject
     {
-        //public WP_Pistol pistol { get; set; }
         //建構子 子彈座標，發射速度，
         public WeaponFater(int x, int y, Image Img) : base(x, y, Img.Width, Img.Height)
         {
             this.Time = 0;
         }
-
+        public WeaponType WPName;
         //圖片
         private Image Img;
         //射擊目標
@@ -61,10 +65,7 @@ namespace WinFormsApp2
         }
     }
 
-    enum WeaponType
-    {
-        Pistol,Rifle
-    }
+ 
 
     class WP_Pistol : WeaponFater
     {
@@ -79,13 +80,16 @@ namespace WinFormsApp2
             GetInfo();
         }
 
+        //基礎數值
         public override void GetInfo()
         {
-            this.Damage = 17;
-            this.ShotSpeed = 500;
-            this.Speed = 50;
-
-            this.MoveSpeed = 3;
+            //名稱
+            WPName = WeaponType.手槍;
+            //武器數值
+            this.Damage = 17;//傷害
+            this.ShotSpeed = 500;//射速
+            this.Speed = 50;//子彈移動速度
+            this.MoveSpeed = 4;//玩家持移速加成
         }
 
         //------------------------
@@ -131,13 +135,14 @@ namespace WinFormsApp2
 
         public override void GetInfo()
         {
-            this.Damage = 17;
-            this.ShotSpeed = 100;
-            this.Speed = 5;
-
-            this.MoveSpeed = 2;
+            //名稱
+            WPName = WeaponType.步槍;
+            //武器數值
+            this.Damage = 31;//傷害
+            this.ShotSpeed = 400;//射速
+            this.Speed = 50;//子彈移動速度
+            this.MoveSpeed = 3;//玩家持有移速加成
         }
-
 
 
         //------------------------

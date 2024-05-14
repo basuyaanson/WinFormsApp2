@@ -24,23 +24,28 @@ namespace WinFormsApp2
             return _single;
         }
         //-------獲取遊戲對象
-        //獲取玩家對象
-        public HeroFather Hero
-        {
-            get; set;
-        }
-
+        //獲取鼠標
+        public List<Background> BackG = new List<Background>();
         //獲取鼠標
         public Aim Aim
         {
             get; set;
         }
-
+       
+        //獲取玩家對象
+        public HeroFather Hero
+        {
+            get; set;
+        }
+        
+        //獲取武器對象
         public WeaponFater Wp
         {
             get; set;
         }
 
+
+        //獲取玩家子彈
         public List<WeaponFater> HeroBulletList = new List<WeaponFater>();
 
         //獲取敵人對象
@@ -68,39 +73,58 @@ namespace WinFormsApp2
             else if (go is WeaponFater)
             {
                 this.HeroBulletList.Add(go as WeaponFater);
-                Console.WriteLine("fire");
+            }
+            else if (go is Background)
+            {
+                this.BackG.Add(go as Background);
+               
             }
         }
 
         //繪製對象
-        public void DrwaGameObject(Graphics g)
+        public void DrawGameObject(Graphics g)
         {
-            collision();
-            this.Hero.Draw(g);
+            collision();//碰撞
+            this.Hero.Draw(g);//玩家
+            //玩家子彈
             for (int i = 0; i < HeroBulletList.Count; i++)
             {
                 HeroBulletList[i].Draw(g);
             }
+            //敵人
             for (int i = 0; i < EnemyList.Count; i++)
             {
                 EnemyList[i].Draw(g);
             }
         }
 
+        public void DrawBK(Graphics g)
+        {
+            for (int i = 0; i < BackG.Count; i++)
+            {
+                BackG[i].Draw(g);
+            }
+        }
+
         //刪除對象
         public void RemoveGameObject(GameObject go)
         {
-          /*if (go is EnemyFather)
+            if (go is EnemyFather)
             {
                 EnemyList.Remove(go as EnemyFather);
             }
-            else if (go is HeroBullet)
+            else if (go is WeaponFater)
             {
-                HeroBulletList.Remove(go as HeroBullet);
+                HeroBulletList.Remove(go as WeaponFater);
             }
-            /* else if (go is EnemyBullet)
+            else if (go is Background)
+            {
+                BackG.Remove(go as Background);
+            }
+
+            /* else if (go is EnemyFather)
              {
-                 EnemyBulletList.Remove(go as EnemyBullet);
+                  EnemyBulletList.Remove(go as EnemyBullet);
              }*/
 
         }
@@ -116,7 +140,7 @@ namespace WinFormsApp2
                  {
                         Hero.HP -= EnemyList[i].Damage;//命中扣血
                         Hero.IsDead();//檢測生命值
-                        SingleObject.GetSingle().EnemyList.Remove(EnemyList[i]);//刪除敵人
+                        SingleObject.GetSingle().RemoveGameObject(EnemyList[i]);//刪除敵人
                         break;
                  }
                 //與 玩家子彈碰撞
@@ -126,7 +150,7 @@ namespace WinFormsApp2
                     {
                         EnemyList[i].HP -= Hero.Damage;//命中扣血
                         EnemyList[i].IsDead();//檢測生命值
-                        SingleObject.GetSingle().HeroBulletList.Remove(HeroBulletList[j]);//刪除子彈
+                        SingleObject.GetSingle().RemoveGameObject(HeroBulletList[j]);//刪除子彈
                         break;
                     }
                 }

@@ -64,7 +64,7 @@ namespace WinFormsApp2
                     this.HP = 80;
                     this.Speed = 3;
                     this.Damage = 30;
-                    this.Score = 10;
+                    this.Score = 1;
                     break;
             
             }
@@ -141,7 +141,7 @@ namespace WinFormsApp2
                     this.HP = 80;
                     this.Speed = 1.5;
                     this.Damage = 30;
-                    this.Score = 10;
+                    this.Score = 3;
                     break;
             }
         }
@@ -210,7 +210,7 @@ namespace WinFormsApp2
                     this.HP = 200;
                     this.Speed = 1.5;
                     this.Damage = 30;
-                    this.Score = 100;
+                    this.Score = 10;
                     break;
             }
         }

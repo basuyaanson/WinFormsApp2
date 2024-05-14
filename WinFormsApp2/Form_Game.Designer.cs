@@ -35,10 +35,10 @@
             L_Score = new Label();
             L_PlayerInfo = new Label();
             L_WaveCount = new Label();
-            panel1 = new Panel();
+            P_Info = new Panel();
             Time_Tick = new System.Windows.Forms.Timer(components);
             Fire_Tick = new System.Windows.Forms.Timer(components);
-            panel1.SuspendLayout();
+            P_Info.SuspendLayout();
             SuspendLayout();
             // 
             // Game_Tick
@@ -82,9 +82,8 @@
             L_PlayerInfo.Font = new Font("Microsoft JhengHei UI", 12F);
             L_PlayerInfo.Location = new Point(12, 138);
             L_PlayerInfo.Name = "L_PlayerInfo";
-            L_PlayerInfo.Size = new Size(41, 20);
+            L_PlayerInfo.Size = new Size(0, 20);
             L_PlayerInfo.TabIndex = 3;
-            L_PlayerInfo.Text = "射速";
             // 
             // L_WaveCount
             // 
@@ -96,18 +95,18 @@
             L_WaveCount.TabIndex = 4;
             L_WaveCount.Text = "波次 : 99";
             // 
-            // panel1
+            // P_Info
             // 
-            panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(L_WaveCount);
-            panel1.Controls.Add(L_HP);
-            panel1.Controls.Add(L_timeCount);
-            panel1.Controls.Add(L_PlayerInfo);
-            panel1.Controls.Add(L_Score);
-            panel1.Location = new Point(12, 12);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(334, 273);
-            panel1.TabIndex = 5;
+            P_Info.BackColor = SystemColors.ActiveCaption;
+            P_Info.Controls.Add(L_WaveCount);
+            P_Info.Controls.Add(L_HP);
+            P_Info.Controls.Add(L_timeCount);
+            P_Info.Controls.Add(L_PlayerInfo);
+            P_Info.Controls.Add(L_Score);
+            P_Info.Location = new Point(12, 12);
+            P_Info.Name = "P_Info";
+            P_Info.Size = new Size(160, 278);
+            P_Info.TabIndex = 5;
             // 
             // Time_Tick
             // 
@@ -123,7 +122,9 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1584, 861);
-            Controls.Add(panel1);
+            Controls.Add(P_Info);
+            MaximumSize = new Size(1600, 900);
+            MinimumSize = new Size(1600, 900);
             Name = "Form_Game";
             Text = "Form1";
             Load += Form_Game_Load;
@@ -133,8 +134,8 @@
             MouseClick += Form_Game_MouseClick;
             MouseDown += Form_Game_MouseDown;
             MouseMove += Form1_MouseMove;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            P_Info.ResumeLayout(false);
+            P_Info.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -146,7 +147,7 @@
         private Label L_Score;
         private Label L_PlayerInfo;
         private Label L_WaveCount;
-        private Panel panel1;
+        private Panel P_Info;
         private System.Windows.Forms.Timer Time_Tick;
         private System.Windows.Forms.Timer Fire_Tick;
     }

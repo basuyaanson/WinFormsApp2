@@ -55,19 +55,27 @@ namespace WinFormsApp2
             get;
             set;
         }
-        public int Damage
+        public double Damage
         { get; set; }
         public int Level
         { get; set; }
-        public int ShotSpeed
+        public double ShotSpeed
         { get; set; }
         public int Number
+        { get; set; }
+        public int Score
         { get; set; }
 
 
         //繪製事件
         public virtual void Draw(Graphics g)
         {
+        }
+
+        //碰撞檢測
+        public Rectangle GetRectangle()
+        {
+            return new Rectangle(this.x, this.y, this.Width, this.Height);
         }
     }
 }

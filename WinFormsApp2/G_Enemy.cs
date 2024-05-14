@@ -25,12 +25,21 @@ namespace WinFormsApp2
         {
             get; set;
         }
-        public int HitScore
-        { get; set; }
 
         public virtual void GetEnemyNumber(int Number)
         {
           
+        }
+
+        //死亡
+        public virtual void IsDead()
+        {
+            if (this.HP <= 0)
+            {
+                //刪除自身
+                SingleObject.GetSingle().EnemyList.Remove(this);//
+                SingleObject.GetSingle().Hero.Score += this.Score;//
+            }
         }
     }
 
@@ -66,7 +75,7 @@ namespace WinFormsApp2
                     this.HP = 80;
                     this.Speed = 2;
                     this.Damage = 30;
-                    this.HitScore = 10;
+                    this.Score = 10;
                     break;
             
             }
@@ -136,14 +145,14 @@ namespace WinFormsApp2
                     this.HP = 80;
                     this.Speed = 5;
                     this.Damage = 30;
-                    this.HitScore = 10;
+                    this.Score = 10;
                     break;
                 //坦克
                 case 1:
                     this.HP = 80;
                     this.Speed = 1.5;
                     this.Damage = 30;
-                    this.HitScore = 10;
+                    this.Score = 10;
                     break;
             }
         }
@@ -211,7 +220,7 @@ namespace WinFormsApp2
                     this.HP = 200;
                     this.Speed = 1.5;
                     this.Damage = 30;
-                    this.HitScore = 100;
+                    this.Score = 100;
                     break;
             }
         }

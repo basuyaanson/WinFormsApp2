@@ -69,12 +69,11 @@ namespace WinFormsApp2
         public virtual string[] GetBuff()
         {
             string[] buff = new string[3];
-            
             Random r = new Random();
             //移動速度 生命值 射速加乘 傷害加成 武器類型
             int rr = r.Next(0,4);
            
-            switch (r.Next(0, 3))
+            switch (r.Next(0, 4))
             {
                 case 0:
                     buff[0] = "0";
@@ -86,7 +85,7 @@ namespace WinFormsApp2
                     return buff;
                 case 2:
                     buff[0] = "2";
-                    buff[1] = "變更射擊速度 快";
+                    buff[1] = "變更武器 手槍";
                     return buff;
                 case 3:
                     buff[0] = "3";
@@ -105,21 +104,27 @@ namespace WinFormsApp2
             switch (selcet)
             {
                 case "0":
-                    this.Speed += 1;
+                    HeroSpeed += 1;
+                    Console.WriteLine("選擇0");
                     break;
                 case "1":
                     this.HP += 5;
+                    Console.WriteLine("選擇1");
                     break;
                 case "2":
-                    this.ShotSpeed = 100;
+                    WeaponNumber = 0;
+                    Console.WriteLine("選擇2");
                     break;
                 case "3":
-                    this.Damage += 2;
+                    HeroDamage += 2;
+                    Console.WriteLine("選擇3");
                     break;
             }
+            Console.WriteLine("升級");
             this.Level += 1;
         }
 
+        //-----------------------
         //開火
         public virtual void Fire()
         {
@@ -137,6 +142,15 @@ namespace WinFormsApp2
 
         }
 
+        //死亡
+        public virtual void IsDead()
+        {
+            if (this.HP <= 0)
+            {
+               //
+            }
+        }
+
     }
 
     //普通人
@@ -149,7 +163,7 @@ namespace WinFormsApp2
             //玩家基礎數值
             this.Level = 1;//等級
             this.HP = 100;//生命值
-         
+           
             GetHeroInfo();
             SetWeaponInfo(weaponNumber);
         }
@@ -221,8 +235,8 @@ namespace WinFormsApp2
         {
             g.DrawImage(img, this.x, this.y);
         }
+      
     }
-
 
     //準心
     class Aim : GameObject
@@ -247,13 +261,13 @@ namespace WinFormsApp2
         public readonly static Keys keydown = Keys.S;
         public readonly static Keys keyleft = Keys.A;
         public readonly static Keys keyright = Keys.D;
-        public readonly static Keys keyP = Keys.P;
+        public readonly static Keys keySpace = Keys.Space;
 
         public static bool IsUp = false;
         public static bool IsDown = false;
         public static bool IsLeft = false;
         public static bool IsRight = false;
-        public static bool IsP = true;
+        public static bool IsSpace = true;
     }
 
 }

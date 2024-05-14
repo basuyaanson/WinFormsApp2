@@ -25,7 +25,7 @@ namespace WinFormsApp2
         {
             get; set;
         }
-
+      
         public virtual void GetEnemyNumber(int Number)
         {
           
@@ -54,6 +54,22 @@ namespace WinFormsApp2
             GetEnemyNumber(Number);
         }
         
+        //獲得敵人編號對應數據
+        public override void GetEnemyNumber(int Number)
+        {
+            switch (Number)
+            {
+                //普通敵人
+                case 0:
+                    this.HP = 80;
+                    this.Speed = 3;
+                    this.Damage = 30;
+                    this.Score = 10;
+                    break;
+            
+            }
+        }
+
         //獲得對應圖片
         public static Image GetImageNumber(int ImgNumber)
         {
@@ -65,21 +81,6 @@ namespace WinFormsApp2
             return null;
         }
 
-        //獲得敵人編號對應數據
-        public override void GetEnemyNumber(int Number)
-        {
-            switch (Number)
-            {
-                //普通敵人
-                case 0:
-                    this.HP = 80;
-                    this.Speed = 2;
-                    this.Damage = 30;
-                    this.Score = 10;
-                    break;
-            
-            }
-        }
 
         //-----------------複寫
         //繪製事件
@@ -123,18 +124,6 @@ namespace WinFormsApp2
             GetEnemyNumber(Number);
         }
 
-        //獲得對應圖片
-        public static Image GetImageNumber(int ImgNumber)
-        {
-            switch (ImgNumber)
-            {
-                case 0:
-                case 1:
-                    return Asset.em2;
-            }
-            return null;
-        }
-
         //獲得敵人編號對應數據
         public override void GetEnemyNumber(int Number)
         {
@@ -155,6 +144,18 @@ namespace WinFormsApp2
                     this.Score = 10;
                     break;
             }
+        }
+
+        //獲得對應圖片
+        public static Image GetImageNumber(int ImgNumber)
+        {
+            switch (ImgNumber)
+            {
+                case 0:
+                case 1:
+                    return Asset.em2;
+            }
+            return null;
         }
 
         //-----------------複寫
@@ -199,6 +200,22 @@ namespace WinFormsApp2
             GetEnemyNumber(Number);
         }
 
+        //獲得敵人編號對應數據
+        public override void GetEnemyNumber(int Number)
+        {
+            switch (Number)
+            {
+                
+                case 0:
+                    this.HP = 200;
+                    this.Speed = 1.5;
+                    this.Damage = 30;
+                    this.Score = 100;
+                    break;
+            }
+        }
+
+
         //獲得對應圖片
         public static Image GetImageNumber(int ImgNumber)
         {
@@ -210,21 +227,7 @@ namespace WinFormsApp2
             return null;
         }
 
-        //獲得敵人編號對應數據
-        public override void GetEnemyNumber(int Number)
-        {
-            switch (Number)
-            {
-                //跑者
-                case 0:
-                    this.HP = 200;
-                    this.Speed = 1.5;
-                    this.Damage = 30;
-                    this.Score = 100;
-                    break;
-            }
-        }
-
+    
         //-----------------複寫
         //繪製事件
         public override void Draw(Graphics g)

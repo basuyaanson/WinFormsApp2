@@ -112,13 +112,13 @@ namespace WinFormsApp2
             for (int i = 0; i < EnemyList.Count; i++)
             {
                  //與 玩家碰撞
-               /*  if (EnemyList[i].GetRectangle().IntersectsWith(Hero.GetRectangle()))
+               if (EnemyList[i].GetRectangle().IntersectsWith(Hero.GetRectangle()))
                  {
-                     Hero.HP -= EnemyList[i].Damage;//命中扣血
-                     EnemyList[i].IsDead();//檢測生命值
-                     SingleObject.GetSingle().EnemyList.Remove(EnemyList[i]);//刪除敵人
-                     break;
-                 }*/
+                        Hero.HP -= EnemyList[i].Damage;//命中扣血
+                        Hero.IsDead();//檢測生命值
+                        SingleObject.GetSingle().EnemyList.Remove(EnemyList[i]);//刪除敵人
+                        break;
+                 }
                 //與 玩家子彈碰撞
                 for (int j = 0; j < HeroBulletList.Count; j++)
                 {

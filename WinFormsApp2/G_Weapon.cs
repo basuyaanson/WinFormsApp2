@@ -65,8 +65,6 @@ namespace WinFormsApp2
         }
     }
 
- 
-
     class WP_Pistol : WeaponFater
     {
         //圖片

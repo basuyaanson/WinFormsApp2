@@ -38,6 +38,7 @@
             P_Info = new Panel();
             Time_Tick = new System.Windows.Forms.Timer(components);
             Fire_Tick = new System.Windows.Forms.Timer(components);
+            L_LV = new Label();
             P_Info.SuspendLayout();
             SuspendLayout();
             // 
@@ -49,20 +50,22 @@
             // L_timeCount
             // 
             L_timeCount.AutoSize = true;
+            L_timeCount.BorderStyle = BorderStyle.FixedSingle;
             L_timeCount.Font = new Font("Microsoft JhengHei UI", 25F);
-            L_timeCount.Location = new Point(18, 17);
+            L_timeCount.Location = new Point(12, 16);
             L_timeCount.Name = "L_timeCount";
-            L_timeCount.Size = new Size(99, 43);
+            L_timeCount.Size = new Size(101, 45);
             L_timeCount.TabIndex = 0;
             L_timeCount.Text = "9999";
             // 
             // L_HP
             // 
             L_HP.AutoSize = true;
+            L_HP.BorderStyle = BorderStyle.FixedSingle;
             L_HP.Font = new Font("Microsoft JhengHei UI", 15F);
-            L_HP.Location = new Point(12, 238);
+            L_HP.Location = new Point(12, 215);
             L_HP.Name = "L_HP";
-            L_HP.Size = new Size(115, 25);
+            L_HP.Size = new Size(117, 27);
             L_HP.TabIndex = 1;
             L_HP.Text = "血量 : 5000";
             // 
@@ -89,7 +92,7 @@
             // 
             L_WaveCount.AutoSize = true;
             L_WaveCount.Font = new Font("Microsoft JhengHei UI", 15F);
-            L_WaveCount.Location = new Point(18, 103);
+            L_WaveCount.Location = new Point(12, 94);
             L_WaveCount.Name = "L_WaveCount";
             L_WaveCount.Size = new Size(91, 25);
             L_WaveCount.TabIndex = 4;
@@ -98,6 +101,7 @@
             // P_Info
             // 
             P_Info.BackColor = SystemColors.ActiveCaption;
+            P_Info.Controls.Add(L_LV);
             P_Info.Controls.Add(L_WaveCount);
             P_Info.Controls.Add(L_HP);
             P_Info.Controls.Add(L_timeCount);
@@ -116,6 +120,17 @@
             // Fire_Tick
             // 
             Fire_Tick.Tick += Fire_Tick_Tick;
+            // 
+            // L_LV
+            // 
+            L_LV.AutoSize = true;
+            L_LV.BorderStyle = BorderStyle.FixedSingle;
+            L_LV.Font = new Font("Microsoft JhengHei UI", 15F);
+            L_LV.Location = new Point(12, 242);
+            L_LV.Name = "L_LV";
+            L_LV.Size = new Size(117, 27);
+            L_LV.TabIndex = 5;
+            L_LV.Text = "血量 : 5000";
             // 
             // Form_Game
             // 
@@ -150,5 +165,6 @@
         private Panel P_Info;
         private System.Windows.Forms.Timer Time_Tick;
         private System.Windows.Forms.Timer Fire_Tick;
+        private Label L_LV;
     }
 }
